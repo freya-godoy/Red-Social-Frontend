@@ -1,16 +1,94 @@
-import React from 'react'
+import React, { useState } from "react";
+import useForm from "../../../hooks/useForm";
+import { Global } from "../../../helpers/Global";
+import useAuth from "../../../hooks/useAuth";
 
 const Login = () => {
+  const { form, changed } = useForm({});
+  const [saved, setSaved] = useState("not_senden");
+  const { authUser } = useAuth();
+
+  const { setAuth } = useAuth;
+
+  const loginUser = async (e) => {
+    e.preventDefault();
+
+    //Datos del formulario
+    let userToLogin = form;
+
+    //Peticion al backend
+    const request = await fetch(Global.url + "user/login", {
+      method: "POST",
+      body: JSON.stringify(userToLogin),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await request.json();
+
+    console.log("loginUser data: ", data);
+
+    if (data.status == "success") {
+      //Persistir los datos en el navegador
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      setSaved("login");
+      authUser();
+
+      //Set datos en el auth
+      setAuth(data.user);
+
+      //Redireccion
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } else {
+      setSaved("error");
+    }
+  };
+
   return (
     <>
-    <header className="content__header content__header--public">
-      <h1 className="content__title">Login</h1>
-    </header>
-    <div className="content__posts">
+      <header className="content__header content__header--public">
+        <h1 className="content__title">Login</h1>
+      </header>
+      <div className="content__posts">
+        {saved == "login" ? (
+          <strong className="alert alert-danger">
+            {" "}
+            "Usuario indentificado correctamente!!"
+          </strong>
+        ) : (
+          ""
+        )}
+        {saved == "error" ? (
+          <strong className="alert alert-danger">
+            {" "}
+            "Usuario no registrado correctamente"
+          </strong>
+        ) : (
+          ""
+        )}
+        <form className="form-login" onSubmit={loginUser}>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input type="email" name="email" onChange={changed} />
+          </div>
 
-    </div>
-  </>
-  )
-}
+          <div className="form-group">
+            <label htmlFor="password">Contraseña</label>
+            <input type="password" name="password" onChange={changed} />
+          </div>
+          <input
+            type="submit"
+            value="Identificate"
+            className="btn btn-success"
+          />
+        </form>
+      </div>
+    </>
+  );
+};
 
-export default Login
+export default Login;
