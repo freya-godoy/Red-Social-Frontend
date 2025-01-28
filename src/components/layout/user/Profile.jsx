@@ -86,7 +86,7 @@ const Profile = () => {
 
   const getPublications = async (nextPage = 1, newProfile = false) => {
     const request = await fetch(
-      Global.url + "publication/user" + params.userId + "/" + nextPage,
+      Global.url + "publication/user/" + params.userId + "/" + nextPage,
       {
         method: "GET",
         headers: {
@@ -124,7 +124,6 @@ const Profile = () => {
     <>
       <header className="aside__profile-info">
         {" "}
-        {/*key={user._id}*/}
         <div className="profile-info__general-info">
           <div className="general-info__container-avatar">
             {user.image && user.image !== "default.png" ? (

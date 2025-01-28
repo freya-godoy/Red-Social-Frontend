@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import UserList from "../user/UserList";
 import GetProfile from "../../../helpers/Getprofile";
 
-
 const Following = () => {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
@@ -77,48 +76,6 @@ const Following = () => {
         more={more}
         loading={loading}
       />
-
-      <div className="content__posts">
-        {users.map((user) => (
-          <article className="posts__post" key={user._id}>
-            <div className="post__container">
-              <div className="post__image-user">
-                <a href="#" className="post__image-link">
-                  {user.image !== "default.png" ? (
-                    <img
-                      src={Global.url + "user/avatar/" + user.image}
-                      className="post__user-image"
-                      alt="Foto de perfil"
-                    />
-                  ) : (
-                    <img
-                      src={avatar}
-                      className="post__user-image"
-                      alt="Foto de perfil"
-                    />
-                  )}
-                </a>
-              </div>
-
-              <div className="post__body">
-                <div className="post__user-info">
-                  <a href="#" className="user-info__name">
-                    {user.name} {user.surname}
-                  </a>
-                  <span className="user-info__divider"> | </span>
-                  <a href="#" className="user-info__create-date">
-                    {new Date(user.created_at).toLocaleDateString()}
-                  </a>
-                </div>
-
-                <h4 className="post__content">{user.bio}</h4>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      <br />
     </>
   );
 };

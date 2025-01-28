@@ -13,7 +13,7 @@ const PublicLayout = () => {
 
       {/* Contenido principal */}
       <section className="layout_content">
-        {!auth._id ? <Outlet /> : <Navigate to="/social" />}
+        {!auth._id ? <Outlet /> : <Navigate to="/social/" />}
       </section>
     </>
   );

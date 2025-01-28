@@ -13,6 +13,7 @@ const PublicationList = ({
   setMore,
 }) => {
   const { auth } = useAuth();
+
   const nextPage = () => {
     let next = page + 1;
     setPage(next);
@@ -75,7 +76,7 @@ const PublicationList = ({
               <div className="post__body">
                 <div className="post__user-info">
                   <a href="#" className="user-info__name">
-                    {publication.user.nameS}
+                    {publication.user.name}
                   </a>
                   <span className="user-info__divider"> | </span>
                   <a href="#" className="user-info__create-date">

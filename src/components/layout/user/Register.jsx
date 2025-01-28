@@ -55,7 +55,6 @@ const Register = () => {
             <label htmlFor="name">Nombre</label>
             <input type="text" name="name" onChange={changed} />
           </div>
-          1
           <div className="form-group">
             <label htmlFor="surname">Apellido</label>
             <input type="text" name="surname" onChange={changed}></input>
