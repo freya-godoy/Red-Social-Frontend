@@ -84,7 +84,7 @@ Perfil 👩
 
 Social 💬
 
-![Pantalla de inicio](./imagenes-para-readme/muestra-login-red-social.png)
+![Pantalla de inicio](./imagenes-para-readme/muestra-de-ruta-gente-red-social.png)
 
 Ajustes 🔧
 
